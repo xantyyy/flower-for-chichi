@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: Solitreo;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background: #fee2e9;
+  font-family: "Pangolin", cursive;
+  font-size: 1vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  top: 0vmin;
+}
+
+.envelope {
+  position: relative;
+  background: #f980a1;
+  height: 30vmin;
+  width: 47.9vmin;
+}
+
+.card {
+  position: absolute;
+  background: white;
+  height: 25vmin;
+  width: 43vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 2.5vmin;
+  top: 0vmin;
+  animation: slide-rev 0.2s ease-out;
+}
+
+.message {
+  position: absolute;
+  top: 3vmin;
+}
+
+.cover {
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-bottom: 15vmin solid #fba7bd;
+  border-left: 24vmin solid transparent;
+  border-right: 24vmin solid transparent;
+  top: 15vmin;
+  z-index: 3;
+}
+
+.cover::after {
+  /*left triangle*/
+  position: absolute;
+  content: "";
+  border-left: 24.5vmin solid #fcbbcc;
+  border-bottom: 15vmin solid transparent;
+  border-top: 15vmin solid transparent;
+  top: -15vmin;
+  left: -24vmin;
+}
+
+.cover::before {
+  position: absolute;
+  content: "";
+  border-right: 24.5vmin solid #fcbbcc;
+  border-bottom: 15vmin solid transparent;
+  border-top: 15vmin solid transparent;
+  top: -15vmin;
+  left: -0.5vmin;
+}
+
+.lid {
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-top: 15vmin solid #f980a1;
+  border-left: 24vmin solid transparent;
+  border-right: 24vmin solid transparent;
+  top: 0;
+  transform-origin: top;
+  animation: open-rev 2s;
+}
+
+.container:hover .lid {
+  animation: open 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.container:hover .card {
+  animation: slide 0.2s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.shadow {
+  position: relative;
+  top: 3vmin;
+  border-radius: 50%;
+  opacity: 0.7;
+  height: 2vmin;
+  width: 48vmin;
+  background: #e8c5d0;
+}
+
+.heart {
+  position: relative;
+  width: 5vmin;
+  height: 4vmin;
+  top: 8vmin;
+  left: -1vmin;
+}
+
+.heart:before,
+.heart:after {
+  position: absolute;
+  content: "";
+  left: 2.5vmin;
+  top: 7vim;
+  width: 2.5vmin;
+  height: 4vmin;
+  background: #f40b4a;
+  border-radius: 2.5vmin 2.5vmin 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+@keyframes open {
+  100% {
+    transform: rotatex(180deg);
+  }
+}
+@keyframes slide {
+  100% {
+    transform: translatey(-15vmin);
+    z-index: 2;
+  }
+}
+@keyframes open-rev {
+  from {
+    transform: rotatex(-180deg);
+  }
+}
+@keyframes slide-rev {
+  from {
+    transform: translatey(-15vmin);
+  }
+}
+
+:root {
+  --rotationDuration: 20s;
+  --hoverDuration: 0.3s;
+
+  --easeIn: cubic-bezier(0.32, 0, 0.67, 0);
+  --easeOut: cubic-bezier(0.33, 1, 0.68, 1);
+
+  --textColor: #000;
+  --bgColor: #A6B8B1;
+  --accentColor: #E8D6C1;
+}
+
+.link {
+  width: 7rem;
+  height: 7rem;
+  display: inline-block;
+  font: 300 1.55rem/1.4 "Josefin Sans"; 
+  text-transform: uppercase;
+  letter-spacing: 0.1175em;
+  word-spacing: 0.3em;
+  text-decoration: none;
+}
+
+.link__svg {
+  width: 100%;
+  height: auto;
+  transform-box: fill-box;
+  fill: var(--textColor);
+  stroke: var(--textColor);
+  stroke-width: 0.05em;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.link__cloud {
+  transform-origin: 50% 50%;
+  animation: rotate normal infinite 3 var(--rotationDuration) linear;
+  fill: rgba(148, 194, 17, 0.8);
+}
+
+.link__face,
+.link__arrow {
+  transform-origin: 50% 50%;
+  transition: transform var(--hoverDuration) / 2 var(--easeIn);
+}
+
+.link:hover .link__face,
+.link:hover .link__arrow {
+  transform: scale(1.1);
+  transition: transform var(--hoverDuration) var(--easeOut);
+}
+
+.link__arrow {
+  stroke-width: 0.075em;
+}
+
+.link__text {
+  animation: rotateReverse normal infinite var(--rotationDuration) linear;
+  transform-origin: 50% 50%;
+}
+
+.link:hover .link__text {
+  animation-play-state: paused;
+}
+
+.link--alt {
+  font-size: 1.15rem;
+  letter-spacing: 0;
+  word-spacing: 0;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.button {
+  position: absolute;
+  bottom: 10%;
+}
